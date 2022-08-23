@@ -1,73 +1,107 @@
 package ru.netology.radio;
 
 public class Radio {
-    private int currentStation = 0;
-    private int currentVolume = 0;
+    private int maxStation = 9;
+    private int minStation = 0;
+    private int currentStation = minStation;
 
-    public int getCurrentStation() { return currentStation; }
+
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int currentVolume = minVolume;
+
+
+    public Radio(int minStation, int maxStation) {
+        this.minStation = minStation;
+        this.maxStation = maxStation;
+        this.currentStation = minStation;
+    }
+
+    public Radio(int size) {
+        maxStation = minStation + size;
+    }
+
+    public int getCurrentStation() {
+        return currentStation;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getMinStation() {
+        return minStation;
+    }
+
 
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < minStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > maxStation) {
             return;
         }
         currentStation = newCurrentStation;
     }
 
     public void nextCurrentStation() {
-        if (currentStation < 9) {
+        if (currentStation < maxStation) {
             currentStation = currentStation + 1;
         } else {
-            currentStation = 0;
+            currentStation = minStation;
         }
     }
 
     public void prevCurrentStation() {
-        if (currentStation > 0) {
+        if (currentStation > minStation) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = 9;
+            currentStation = maxStation;
         }
     }
 
-    public void setToMaxStation() {
-        currentStation = 9;
+    public short setToMaxStation() {
+        currentStation = maxStation;
+        return 0;
     }
 
     public void setToMinStation() {
-        currentStation = 0;
+        currentStation = minStation;
     }
 
-    public int getCurrentVolume() { return currentVolume; }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
 
     public void setCurrentVolume(int newCurrentVolume) {
-        if (newCurrentVolume < 0) {
+        if (newCurrentVolume < minVolume) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (newCurrentVolume > maxVolume) {
             return;
         }
         currentVolume = newCurrentVolume;
     }
 
     public void setToMaxVolume() {
-        currentVolume = 10;
+        currentVolume = maxVolume;
     }
 
-    public void setToMinVolume() {
-        currentVolume = 0;
+    public short setToMinVolume() {
+        currentVolume = minVolume;
+        return 0;
     }
+
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
     }
